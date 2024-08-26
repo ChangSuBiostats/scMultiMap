@@ -120,7 +120,8 @@ scMultiMap <- function(obj, pairs_df,
                             verbose = verbose)
   # match with the ordering in pairs_df
   pairs <- paste(pairs_df$gene, pairs_df$peak, sep = '.')
-  wls_res <- wls_res[match(pairs, rownames(wls_res)),]
+  wls_pairs <- paste(wls_res$gene, wls_res$peak, sep = '.')
+  wls_res <- wls_res[match(pairs, wls_pairs),]
   rownames(wls_res) <- NULL
   return(wls_res)
 }
