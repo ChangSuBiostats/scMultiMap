@@ -92,10 +92,10 @@ scMultiMap <- function(obj, pairs_df,
   irls_res <- list()
   # preprocess the vector for biological samples, if specified
   if(!is.null(bsample) & length(bsample) != ncol(obj)){
-    if(!'bsample' %in% colnames(obj@meta.data)){
+    if(!bsample %in% colnames(obj@meta.data)){
       stop(sprintf('bsample label %s was not found in the metadata of Seurat object', bsample))
     }else{
-      bsample <- obj$bsample
+      bsample <- obj[[bsample]][[1]]
     }
   }
   # run IRLS for each modality, respectively

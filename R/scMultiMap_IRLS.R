@@ -48,7 +48,7 @@ scMultiMap_IRLS <- function(X, seq_depth, bsample=NULL, irls=T, verbose=F){
   if(is.null(bsample)){
     bsample_mtx <- matrix(1, nrow = n_cell, ncol = 1)
   }else{
-    if(!is.factor(bsample)) bsample <- factor(bsample)
+    if(!is.factor(bsample)) bsample <- factor(bsample, levels = unique(bsample), labels = unique(bsample))
     bsample_mtx <- stats::model.matrix(~bsample-1)
     colnames(bsample_mtx) <- levels(bsample)
   }

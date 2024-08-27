@@ -66,8 +66,10 @@ scMultiMap_WLS <- function(count_list,
       M_peak <- outer(seq_depth_list[[2]], irls_list[[2]]$mu[g_peaks])
     }
     # extract weights
-    w_gene <- 1 / (m_gene + m_gene^2 / irls_list[[1]]$theta)
-    W_peak <- 1 / (M_peak + M_peak^2 / irls_list[[2]]$theta)
+    w_gene <- m_gene + m_gene^2 / irls_list[[1]]$theta
+    W_peak <- M_peak + M_peak^2 / irls_list[[2]]$theta
+    w_gene[is.na(w_gene)|w_gene <= 0] = 1
+    W_peak[is.na(W_peak)|W_peak <= 0] = 1
     # extract variance
     var_gene <- m_gene + seq_depth_list[[1]]^2 * irls_list[[1]]$sigma_sq[g]
     Var_peak <- M_peak + outer(seq_depth_list[[2]]^2, irls_list[[2]]$sigma_sq[g_peaks])
@@ -75,10 +77,10 @@ scMultiMap_WLS <- function(count_list,
     # run WLS for this gene
     ##
     wls_df <- scMultiMap_WLS_by_gene(x_gene, X_peak,
-                                      m_gene, M_peak,
-                                      w_gene, W_peak, #weights
-                                      var_gene, Var_peak,
-                                      seq_depth_list[[1]], seq_depth_list[[2]])
+                                     m_gene, M_peak,
+                                     w_gene, W_peak,
+                                     var_gene, Var_peak,
+                                     seq_depth_list[[1]], seq_depth_list[[2]])
     wls_df$gene <- g
     wls_df$peak <- g_peaks
     wls_df <- wls_df[, c('gene', 'peak', 'pval', 'test_stat', 'covar')]

@@ -38,10 +38,10 @@ scMultiMap_WLS_by_gene <- function(x_gene, X_peak,
   # calculate regression weights
   g <- w_gene * W_peak
   # calculate covariance estimates
-  nume <- Matrix::colSums(x_gene * X_peak * g * s_gp)
-  est <- nume / colSums(s_gp^2 * g)
+  nume <- Matrix::colSums(x_gene * X_peak / g * s_gp)
+  est <- nume / colSums(s_gp^2 / g)
   # calculate test statistics
-  deno <- Matrix::colSums(var_gene * Var_peak * g^2 * s_gp^2)
+  deno <- Matrix::colSums(var_gene * Var_peak / g^2 * s_gp^2)
   ts <- nume / sqrt(deno)
   # calculate p values
   pval <- stats::pnorm(abs(ts), lower.tail = F) * 2
