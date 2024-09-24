@@ -15,7 +15,7 @@ install_github("ChangSuBiostats/scMultiMap")
 
 ## Vignettes
 
-The [vignette](https://changsubiostats.github.io/scMultiMap/articles/scMultiMap.html) shows an example of using scMultiMap for inferring peak-gene associations in cell types using 10x multiome data on PBMC.
+The [vignette](https://changsubiostats.github.io/scMultiMap/articles/scMultiMap.html) shows a basic example of using scMultiMap for inferring peak-gene associations in cell types using 10x multiome data on PBMC. **The vignettes in this package are currently under active development. More examples are coming soon!**
 
 ## Contact us
 
