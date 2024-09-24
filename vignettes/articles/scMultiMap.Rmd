@@ -46,7 +46,7 @@ There are 3,146 cells in this cell type.
 
 We choose to study the top $2{,}000$ highly expressed genes and top $20{,}000$ highly accessible peaks in CD14 Monocytes, and use a cis-region of width 1Mb to define candidate peak-gene pairs.
 
-```{r include=FALSE}
+```{r include=FALSE, eval=FALSE}
 peak_gene_pairs <- read.table('../../../example_data/CD14 Mono_20000_peak_2000_gene_pairs.txt', header=T)
 ```
 
