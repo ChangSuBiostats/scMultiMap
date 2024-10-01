@@ -1,4 +1,39 @@
 url: https://changsubiostats.github.io/scMultiMap/
 template:
   bootstrap: 5
-
+  bootswatch: simplex
+navbar:
+  structure:
+    left:
+    - home
+    - intro
+    - reference
+    - news
+    right: github
+home:
+  sidebar:
+    structure:
+    - license
+    - authors
+    - links
+  links:
+  - text: scMultiMap manuscript
+    href: https://www.biorxiv.org/content/10.1101/2024.09.24.614814v1
+  - text: Su lab
+    href: https://www.changsu.org
+reference:
+- title: scMultiMap functions
+  desc: |
+    Functions for inferring cell-type-specific peak-gene associations
+  contents:
+  - scMultiMap
+  - scMultiMap_WLS_by_gene
+  - scMultiMap_WLS
+  - scMultiMap_IRLS
+- title: Supporting toy data sets
+  desc: |
+    Data sets for illustrative purposes
+  contents:
+  - small_obj
+  - small_pairs_df
+  - small_irls_list
