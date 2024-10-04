@@ -6,6 +6,7 @@
 \source{
 Cell-type-specific mapping of enhancer and target genes from single-cell multimodal data.
 Chang Su, Dongsoo Lee, Peng Jin, Jingfei Zhang;
+https://www.biorxiv.org/content/10.1101/2024.09.24.614814v1
 }
 \usage{
 scMultiMap(

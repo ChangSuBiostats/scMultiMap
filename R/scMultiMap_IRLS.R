@@ -34,6 +34,7 @@
 #' @source
 #' Cell-type-specific mapping of enhancer and target genes from single-cell multimodal data.
 #' Chang Su, Dongsoo Lee, Peng Jin, Jingfei Zhang;
+#' https://www.biorxiv.org/content/10.1101/2024.09.24.614814v1
 scMultiMap_IRLS <- function(X, seq_depth, bsample=NULL, irls=T, verbose=F){
   if(is.null(dim(X))) X <- matrix(X, ncol = 1)
   if (is.null(seq_depth)) {

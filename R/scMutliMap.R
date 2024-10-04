@@ -46,6 +46,7 @@
 #' @source
 #' Cell-type-specific mapping of enhancer and target genes from single-cell multimodal data.
 #' Chang Su, Dongsoo Lee, Peng Jin, Jingfei Zhang;
+#' https://www.biorxiv.org/content/10.1101/2024.09.24.614814v1
 scMultiMap <- function(obj, pairs_df,
                        bsample = NULL,
                        gene_assay = 'RNA', peak_assay = 'peak',
@@ -122,6 +123,12 @@ scMultiMap <- function(obj, pairs_df,
   pairs <- paste(pairs_df$gene, pairs_df$peak, sep = '.')
   wls_pairs <- paste(wls_res$gene, wls_res$peak, sep = '.')
   wls_res <- wls_res[match(pairs, wls_pairs),]
+  #wls_res <- cbind(wls_res[match(pairs, wls_pairs),],
+  #                 gene_var = irls_res[[1]]$sigma_sq[match(pairs_df$gene, names(irls_res[[1]]$sigma_sq))],
+  #                 peak_var = irls_res[[2]]$sigma_sq[match(pairs_df$peak, names(irls_res[[2]]$sigma_sq))])
+  #wls_res$gene_var[wls_res$gene_var <= 0] <- NA
+  #wls_res$peak_var[wls_res$peak_var <= 0] <- NA
+  #wls_res$cor <- wls_res$covar / sqrt(wls_res$gene_var * wls_res$peak_var)
   rownames(wls_res) <- NULL
   return(wls_res)
 }
