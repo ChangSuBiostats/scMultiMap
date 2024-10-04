@@ -22,27 +22,29 @@ get_top_peak_gene_pairs <- function(obj, gene_top=2000, peak_top=20000,
                                     distance = 5e+05,
                                     gene_assay = 'RNA', peak_assay = 'peak'){
   # focus on top genes
-  top_genes <- order(rowSums(GetAssayData(obj, assay = gene_assay, layer = 'counts')), decreasing = T)[1:gene_top]
+  top_genes <- order(rowSums(obj[[gene_assay]]$counts), decreasing = T)[1:gene_top]
   # and top peaks
-  top_peaks <- order(rowSums(GetAssayData(obj, assay = peak_assay, layer = 'counts')), decreasing = T)[1:peak_top]
+  top_peaks <- order(rowSums(obj[[peak_assay]]$counts), decreasing = T)[1:peak_top]
   # obtain gene locations
   # https://github.com/stuart-lab/signac/blob/HEAD/R/links.R#L281C1-L287C6
-  annot <- Annotation(object = obj[[peak_assay]])
+  annot <- Signac::Annotation(object = obj[[peak_assay]])
   gene.coords <- Signac:::CollapseToLongestTranscript(
     ranges = annot
   )
   peaks <- Signac::granges(x = obj[[peak_assay]])
-  gene_names <- rownames(GetAssayData(obj, assay = gene_assay, layer = 'counts'))
-  gene_names_top <- gene_names[gene_top]
+  gene_names <- rownames(obj[[gene_assay]]$counts)
+  gene_names_top <- gene_names[1:gene_top]
   # genes with high expression levels and known locations from genome annotation
   int_gene_names <- intersect(gene_names_top, gene.coords$gene_name)
   # construct a peak-gene pair sparse matrix with where peaks and genes are within a certain distance
   # https://github.com/stuart-lab/signac/blob/HEAD/R/links.R#L351C3-L355C4
+  suppressWarnings({
   peak_distance_matrix <- Signac:::DistanceToTSS(
     peaks = peaks[top_peaks],
     genes = gene.coords[match(int_gene_names, gene.coords$gene_name)],
     distance = distance
   )
+  })
   summ <- summary(peak_distance_matrix)
   df <- data.frame(gene = colnames(peak_distance_matrix)[summ$j],
                    peak = rownames(peak_distance_matrix)[summ$i])
