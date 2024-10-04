@@ -30,6 +30,7 @@ reference:
   - scMultiMap_WLS_by_gene
   - scMultiMap_WLS
   - scMultiMap_IRLS
+  - get_top_peak_gene_pairs
 - title: Supporting toy data sets
   desc: |
     Data sets for illustrative purposes
@@ -37,3 +38,5 @@ reference:
   - small_obj
   - small_pairs_df
   - small_irls_list
+  - example_pair
+  - example_pair_bsample

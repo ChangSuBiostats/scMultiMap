@@ -29,8 +29,8 @@ head(small_pairs_df)
 dim(small_pairs_df)
 ```
 
+With these example data, we then run scMultiMap:
 ```{r}
-# run scMultiMap
 res <- scMultiMap(small_obj, small_pairs_df) # < 0.1 seconds
 head(res)
 dim(res)
