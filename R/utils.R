@@ -22,9 +22,9 @@ get_top_peak_gene_pairs <- function(obj, gene_top=2000, peak_top=20000,
                                     distance = 5e+05,
                                     gene_assay = 'RNA', peak_assay = 'peak'){
   # focus on top genes
-  top_genes <- order(rowSums(obj[[gene_assay]]$counts), decreasing = T)[1:gene_top]
+  top_genes <- order(Matrix::rowSums(obj[[gene_assay]]$counts), decreasing = T)[1:gene_top]
   # and top peaks
-  top_peaks <- order(rowSums(obj[[peak_assay]]$counts), decreasing = T)[1:peak_top]
+  top_peaks <- order(Matrix::rowSums(obj[[peak_assay]]$counts), decreasing = T)[1:peak_top]
   # obtain gene locations
   # https://github.com/stuart-lab/signac/blob/HEAD/R/links.R#L281C1-L287C6
   annot <- Signac::Annotation(object = obj[[peak_assay]])
@@ -45,7 +45,7 @@ get_top_peak_gene_pairs <- function(obj, gene_top=2000, peak_top=20000,
     distance = distance
   )
   })
-  summ <- summary(peak_distance_matrix)
+  summ <- Matrix::summary(peak_distance_matrix)
   df <- data.frame(gene = colnames(peak_distance_matrix)[summ$j],
                    peak = rownames(peak_distance_matrix)[summ$i])
   return(df)
