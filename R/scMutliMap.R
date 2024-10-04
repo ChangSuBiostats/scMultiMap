@@ -13,6 +13,8 @@
 #' @param seq_depth_list A list of two length n vectors of sequencing depths.
 #' If NULL, they will be calculated as the total number of gene/peak counts in each cell
 #' for two modalities, respectively.
+#' @param p.adjust.method Method for multiple testing adjustment, passed to stats::p.adjust.
+#' Default to 'BH' for FDR control.
 #' @param irls Whether to run IRLS to estimate mean and variance parameters in step 1.
 #' Default to TRUE.
 #' @param verbose Whether to print detailed messages. Default to FALSE.
@@ -51,6 +53,7 @@ scMultiMap <- function(obj, pairs_df,
                        bsample = NULL,
                        gene_assay = 'RNA', peak_assay = 'peak',
                        seq_depth_list = NULL,
+                       p.adjust.method = 'BH',
                        irls = T, verbose = F){
   ##
   # prepare input data for scMultiMap: count and sequencing depth
@@ -123,12 +126,21 @@ scMultiMap <- function(obj, pairs_df,
   pairs <- paste(pairs_df$gene, pairs_df$peak, sep = '.')
   wls_pairs <- paste(wls_res$gene, wls_res$peak, sep = '.')
   wls_res <- wls_res[match(pairs, wls_pairs),]
-  #wls_res <- cbind(wls_res[match(pairs, wls_pairs),],
-  #                 gene_var = irls_res[[1]]$sigma_sq[match(pairs_df$gene, names(irls_res[[1]]$sigma_sq))],
-  #                 peak_var = irls_res[[2]]$sigma_sq[match(pairs_df$peak, names(irls_res[[2]]$sigma_sq))])
-  #wls_res$gene_var[wls_res$gene_var <= 0] <- NA
-  #wls_res$peak_var[wls_res$peak_var <= 0] <- NA
-  #wls_res$cor <- wls_res$covar / sqrt(wls_res$gene_var * wls_res$peak_var)
+  # compute adjusted p values
+  wls_res$padj <- stats::p.adjust(wls_res$pval, method = p.adjust.method)
+  # append correlation estimates
+  gene_var <- irls_res[[1]]$sigma_sq[match(pairs_df$gene, names(irls_res[[1]]$sigma_sq))]
+  peak_var <- irls_res[[2]]$sigma_sq[match(pairs_df$peak, names(irls_res[[2]]$sigma_sq))]
+  # due to mom estimates, some variance estimates may be zero
+  # these genes/peaks tend to have lower abundance
+  # we set those involved correlations to 0
+  gene_var[gene_var <= 0] <- NA
+  peak_var[peak_var <= 0] <- NA
+  wls_res$cor <- wls_res$covar / sqrt(gene_var * peak_var)
+  wls_res$cor[is.na(wls_res$cor)] <- 0
+  # postprocess out-of-bound correlation estimates
+  wls_res$cor[wls_res$cor > 1] <- 1
+  wls_res$cor[wls_res$cor < -1] <- -1
   rownames(wls_res) <- NULL
   return(wls_res)
 }

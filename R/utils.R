@@ -33,9 +33,9 @@ get_top_peak_gene_pairs <- function(obj, gene_top=2000, peak_top=20000,
   )
   peaks <- Signac::granges(x = obj[[peak_assay]])
   gene_names <- rownames(obj[[gene_assay]]$counts)
-  gene_names_top <- gene_names[1:gene_top]
+  gene_names_top <- gene_names[top_genes]
   # genes with high expression levels and known locations from genome annotation
-  int_gene_names <- intersect(gene_names_top, gene.coords$gene_name)
+  int_gene_names <- gene_names_top[gene_names_top %in% gene.coords$gene_name]
   # construct a peak-gene pair sparse matrix with where peaks and genes are within a certain distance
   # https://github.com/stuart-lab/signac/blob/HEAD/R/links.R#L351C3-L355C4
   suppressWarnings({
