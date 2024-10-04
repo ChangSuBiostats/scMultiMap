@@ -143,9 +143,12 @@ The number of rows is equal to the number of pairs in <em>pairs_df</em> present 
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Start step 2: WLS"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "There are 10 unique genes in the peak-gene pairs."</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">res</span>,<span class="fl">2</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     gene                    peak      pval test_stat        covar</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 MALAT1 chr11-65013281-65014841 0.1521555 1.4319591 3.100282e-05</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 MALAT1 chr11-65026934-65027962 0.7938414 0.2613256 5.204042e-06</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     gene                    peak      pval test_stat        covar      padj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 MALAT1 chr11-65013281-65014841 0.1521555 1.4319591 3.100282e-05 0.8273097</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 MALAT1 chr11-65026934-65027962 0.7938414 0.2613256 5.204042e-06 0.9753992</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        cor</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 0.000000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 0.102161</span>
 <span class="r-in"><span><span class="co">#    gene                    peak      pval test_stat        covar</span></span></span>
 <span class="r-in"><span><span class="co"># 1 MALAT1 chr11-65013281-65014841 0.1521555 1.4319591 3.100282e-05</span></span></span>
 <span class="r-in"><span><span class="co"># 2 MALAT1 chr11-65026934-65027962 0.7938414 0.2613256 5.204042e-06</span></span></span>

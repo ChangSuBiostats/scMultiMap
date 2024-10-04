@@ -97,15 +97,22 @@ to run scMultiMap:</p>
 <span><span class="co">#&gt; [1] "Start step 2: WLS"</span></span>
 <span><span class="co">#&gt; [1] "There are 10 unique genes in the peak-gene pairs."</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span></span>
-<span><span class="co">#&gt;     gene                    peak       pval  test_stat         covar</span></span>
-<span><span class="co">#&gt; 1 MALAT1 chr11-65013281-65014841 0.15215553  1.4319591  3.100282e-05</span></span>
-<span><span class="co">#&gt; 2 MALAT1 chr11-65026934-65027962 0.79384145  0.2613256  5.204042e-06</span></span>
-<span><span class="co">#&gt; 3 MALAT1 chr11-65040583-65041780 0.68116942  0.4108679  8.623731e-06</span></span>
-<span><span class="co">#&gt; 4 MALAT1 chr11-65083457-65084665 0.03236884  2.1398259  4.879823e-05</span></span>
-<span><span class="co">#&gt; 5 MALAT1 chr11-65095679-65096871 0.02264609 -2.2793530 -4.308216e-05</span></span>
-<span><span class="co">#&gt; 6 MALAT1 chr11-65110172-65110785 0.88810490 -0.1407026 -1.919029e-06</span></span>
+<span><span class="co">#&gt;     gene                    peak       pval  test_stat         covar      padj</span></span>
+<span><span class="co">#&gt; 1 MALAT1 chr11-65013281-65014841 0.15215553  1.4319591  3.100282e-05 0.8273097</span></span>
+<span><span class="co">#&gt; 2 MALAT1 chr11-65026934-65027962 0.79384145  0.2613256  5.204042e-06 0.9753992</span></span>
+<span><span class="co">#&gt; 3 MALAT1 chr11-65040583-65041780 0.68116942  0.4108679  8.623731e-06 0.9472305</span></span>
+<span><span class="co">#&gt; 4 MALAT1 chr11-65083457-65084665 0.03236884  2.1398259  4.879823e-05 0.7196890</span></span>
+<span><span class="co">#&gt; 5 MALAT1 chr11-65095679-65096871 0.02264609 -2.2793530 -4.308216e-05 0.7196890</span></span>
+<span><span class="co">#&gt; 6 MALAT1 chr11-65110172-65110785 0.88810490 -0.1407026 -1.919029e-06 0.9881934</span></span>
+<span><span class="co">#&gt;           cor</span></span>
+<span><span class="co">#&gt; 1  0.00000000</span></span>
+<span><span class="co">#&gt; 2  0.10216095</span></span>
+<span><span class="co">#&gt; 3  0.29533510</span></span>
+<span><span class="co">#&gt; 4  0.62091902</span></span>
+<span><span class="co">#&gt; 5 -0.57664094</span></span>
+<span><span class="co">#&gt; 6 -0.08605519</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 250   5</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 250   7</span></span></code></pre></div>
 <p>Here, scMultiMap takes a Seurat object with two modalities: RNA and
 peak, and tests the associations between 250 peak-gene pairs. We assume
 that this Seurat object contains the cells from a specific cell type of
