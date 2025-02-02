@@ -2,18 +2,13 @@ url: https://changsubiostats.github.io/scMultiMap/
 template:
   bootstrap: 5
   bootswatch: simplex
-
 articles:
-  - title: "Introduction to scMultiMap"
-    contents:
-      - articles/scMultiMap
-  - title: "scMultiMap for disease-control studies"
-    contents:
-      - articles/disease_control
-  - title: "scMultiMap for integrative analysis with GWAS results"
-    contents:
-      - articles/GWAS
-
+- title: Introduction to scMultiMap
+  contents: articles/scMultiMap
+- title: scMultiMap for disease-control studies
+  contents: articles/disease_control
+- title: scMultiMap for integrative analysis with GWAS results
+  contents: articles/GWAS
 navbar:
   structure:
     left:
@@ -27,12 +22,12 @@ navbar:
     articles:
       text: Vignettes
       menu:
-        - text: "Introduction to scMultiMap"
-          href: articles/scMultiMap.html
-        - text: "scMultiMap for disease-control studies"
-          href: articles/disease_control.html
-        - text: "scMultiMap for integrative analysis with GWAS results"
-          href: articles/GWAS.html
+      - text: Introduction to scMultiMap
+        href: articles/scMultiMap.html
+      - text: scMultiMap for disease-control studies
+        href: articles/disease_control.html
+      - text: scMultiMap for integrative analysis with GWAS results
+        href: articles/GWAS.html
 home:
   sidebar:
     structure:
@@ -71,3 +66,4 @@ reference:
   - validate_with_assay
   - CollapseToLongestTranscript
   - DistanceToTSS
+
