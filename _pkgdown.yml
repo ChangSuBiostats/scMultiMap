@@ -1,0 +1,73 @@
+url: https://changsubiostats.github.io/scMultiMap/
+template:
+  bootstrap: 5
+  bootswatch: simplex
+
+articles:
+  - title: "Introduction to scMultiMap"
+    contents:
+      - articles/scMultiMap
+  - title: "scMultiMap for disease-control studies"
+    contents:
+      - articles/disease_control
+  - title: "scMultiMap for integrative analysis with GWAS results"
+    contents:
+      - articles/GWAS
+
+navbar:
+  structure:
+    left:
+    - home
+    - intro
+    - articles
+    - reference
+    - news
+    right: github
+  components:
+    articles:
+      text: Vignettes
+      menu:
+        - text: "Introduction to scMultiMap"
+          href: articles/scMultiMap.html
+        - text: "scMultiMap for disease-control studies"
+          href: articles/disease_control.html
+        - text: "scMultiMap for integrative analysis with GWAS results"
+          href: articles/GWAS.html
+home:
+  sidebar:
+    structure:
+    - license
+    - authors
+    - links
+  links:
+  - text: scMultiMap manuscript
+    href: https://www.biorxiv.org/content/10.1101/2024.09.24.614814v1
+  - text: Chang Su's homepage
+    href: https://www.changsu.org
+reference:
+- title: scMultiMap functions
+  desc: |
+    Functions for inferring cell-type-specific peak-gene associations
+  contents:
+  - scMultiMap
+  - scMultiMap_WLS_by_gene
+  - scMultiMap_WLS
+  - scMultiMap_IRLS
+  - get_top_peak_gene_pairs
+- title: Supporting toy data sets
+  desc: |
+    Data sets for illustrative purposes
+  contents:
+  - small_obj
+  - small_pairs_df
+  - small_irls_list
+  - example_pair
+  - example_pair_bsample
+- title: Supporting helper functions
+  desc: |
+    Helper functions for downstream analysis or handling peak data
+  contents:
+  - make_gene_to_peak_link
+  - validate_with_assay
+  - CollapseToLongestTranscript
+  - DistanceToTSS

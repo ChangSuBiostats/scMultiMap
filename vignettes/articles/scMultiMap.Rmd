@@ -1,0 +1,327 @@
+---
+title: "Introduction to scMultiMap"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction to scMultiMap}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+
+This vignette shows two examples of applying `scMultiMap` to infer cell-type-specific peak-gene associations with single-cell multimodal data.
+
+
+``` r
+library(scMultiMap)
+library(Signac)
+library(Seurat)
+# for consistency analysis 
+library(GenomicRanges)
+library(rtracklayer)
+```
+
+# 1. Toy example
+
+To illustrate the basic functionality of `scMultiMap`, we use a toy Seurat object `small_obj` and a data frame of candidate peak-gene pairs `small_pairs_df` provided in the R package to run `scMultiMap`:
+
+``` r
+# a Seurat object
+small_obj
+#> An object of class Seurat 
+#> 350 features across 100 samples within 2 assays 
+#> Active assay: RNA (100 features, 0 variable features)
+#>  1 layer present: counts
+#>  1 other assay present: peak
+
+# candidate peak-gene pairs
+head(small_pairs_df)
+#>     gene                    peak
+#> 1 MALAT1 chr11-65013281-65014841
+#> 2 MALAT1 chr11-65026934-65027962
+#> 3 MALAT1 chr11-65040583-65041780
+#> 4 MALAT1 chr11-65083457-65084665
+#> 5 MALAT1 chr11-65095679-65096871
+#> 6 MALAT1 chr11-65110172-65110785
+dim(small_pairs_df)
+#> [1] 250   2
+```
+
+With these example data, we then run `scMultiMap`:
+
+``` r
+res <- scMultiMap(small_obj, small_pairs_df) # < 0.1 seconds
+#> Start step 1: IRLS
+#> Start IRLS for RNA
+#> Start IRLS for peak
+#> Start step 2: WLS
+#> There are 10 unique genes in the peak-gene pairs.
+#> scMultiMap elapsed time: 00:00 (mm:ss)
+head(res)
+#>     gene                    peak       pval  test_stat         covar      padj
+#> 1 MALAT1 chr11-65013281-65014841 0.15215553  1.4319591  3.100282e-05 0.8273097
+#> 2 MALAT1 chr11-65026934-65027962 0.79384145  0.2613256  5.204042e-06 0.9753992
+#> 3 MALAT1 chr11-65040583-65041780 0.68116942  0.4108679  8.623731e-06 0.9472305
+#> 4 MALAT1 chr11-65083457-65084665 0.03236884  2.1398259  4.879823e-05 0.7196890
+#> 5 MALAT1 chr11-65095679-65096871 0.02264609 -2.2793530 -4.308216e-05 0.7196890
+#> 6 MALAT1 chr11-65110172-65110785 0.88810490 -0.1407026 -1.919029e-06 0.9881934
+#>           cor
+#> 1  0.00000000
+#> 2  0.10216095
+#> 3  0.29533510
+#> 4  0.62091902
+#> 5 -0.57664094
+#> 6 -0.08605519
+dim(res)
+#> [1] 250   7
+```
+
+Here, scMultiMap takes a Seurat object with two modalities: RNA and peak, and evaluates the associations between 250 peak-gene pairs. We assume that this Seurat object contains the cells from a specific cell type of interest, such that the inferred associations are cell-type-specific.
+
+# 2. PBMC example, 10x Multiome data
+
+## 2.1 Note: fragment counts are required for scMultiMap
+
+Before demonstrating `scMultiMap` on real data, we highlight an important requirement for peak counts. As discussed in "Discussion" in scMultiMap's [manuscript](https://www.biorxiv.org/content/10.1101/2024.09.24.614814v1), scMultiMap is designed to model **fragment counts**, which are more suitable for count-based modeling and improve downstream analysis performance compared to insertion counts or read counts ([Miao and Kim, 2024](https://www.nature.com/articles/s41592-023-02103-7), [Martens et al., 2024](https://www.nature.com/articles/s41592-023-02112-6)). Therefore, if you plan to use `scMultiMap`, ensure the your scATAC-seq data consist of fragment counts instead of read counts. We recommend using MACS2 for peak calling, as it generates fragment counts (see [Calling peaks](https://stuartlab.org/signac/articles/peak_calling)). If you only have read counts and do not have access to the ATAC-seq fragment files, fragment counts can be estimated following the approach in [Martens et al., 2024](https://www.nature.com/articles/s41592-023-02112-6).
+
+To demonstrate this, we downloaded a 10x Multiome dataset (paired scRNA-seq and scATAC-seq) from 10x, used MACS2 to call peaks by cell types, and generated `processed_seurat_obj_PBMC_10k.rds`. The source code for these steps can be found at  [scMultiMap reproducibility Github repo](https://github.com/ChangSuBiostats/scMultiMap_analysis/preprocessing/preprocess_10x_PBMC_data.R). Calling peak by cell type is to generate cell-type-specific peaks that better represent candidate cell-type-specific enhancers than those identified from merged cell types.
+
+## 2.2 Demo of scMultiMap on CD14 Monocytes
+
+
+``` r
+# set it to the directory where data are saved
+data_dir <- '../../../data'
+```
+
+``` r
+pbmc <- readRDS(sprintf('%s/processed_seurat_obj_PBMC_10k_nextgem.rds', data_dir))
+# in this example, we focus on CD14 monocytes:
+pbmc_cd14 <- subset(pbmc, predicted.id == 'CD14 Mono')
+print(pbmc_cd14)
+```
+
+
+
+
+We choose to study the top 2000 highly expressed genes and top 20000 highly accessible peaks in CD14 Monocytes, and use a cis-region of width 1Mb to define candidate peak-gene pairs.
+
+
+
+``` r
+pairs_df <- get_top_peak_gene_pairs(pbmc_cd14,
+                                    gene_top=2000, peak_top=20000,
+                                    distance = 5e+5,
+                                    gene_assay = 'RNA', # name of the gene assay
+                                    peak_assay = 'peaks_ct') # name of the peak assay
+head(pairs_df)
+#>     gene                    peak
+#> 1 MALAT1 chr11-65614961-65616132
+#> 2 MALAT1 chr11-65918502-65920142
+#> 3 MALAT1 chr11-65856895-65858482
+#> 4 MALAT1 chr11-65496994-65497909
+#> 5 MALAT1 chr11-65569536-65570572
+#> 6 MALAT1 chr11-65711306-65712797
+dim(pairs_df)
+#> [1] 32296     2
+```
+
+Here, we generated 32296 candidate peak-gene pairs generated based on the criterion above. Generally, the pairs to be studied could also be customized and supplied by users.
+
+Nect, we run `scMultiMap` to assess peak-gene associations.
+
+
+``` r
+scMultiMap_res <- scMultiMap(pbmc_cd14, pairs_df,
+                  gene_assay = 'RNA', # name of the gene assay
+                  peak_assay = 'peaks_ct') # name of the peak assay
+#> Start step 1: IRLS
+#> Start IRLS for RNA
+#> Start IRLS for peaks_ct
+#> Start step 2: WLS
+#> There are 1909 unique genes in the peak-gene pairs.
+#> scMultiMap elapsed time: 00:19 (mm:ss)
+```
+
+
+``` r
+head(scMultiMap_res)
+#>     gene                    peak       pval test_stat        covar      padj
+#> 1 MALAT1 chr11-65614961-65616132 0.90652298 0.1174254 1.743388e-09 0.9836402
+#> 2 MALAT1 chr11-65918502-65920142 0.03734129 2.0820129 3.005705e-08 0.3367015
+#> 3 MALAT1 chr11-65856895-65858482 0.26443486 1.1159703 1.604796e-08 0.7232544
+#> 4 MALAT1 chr11-65496994-65497909 0.08524652 1.7210237 2.334859e-08 0.4901409
+#> 5 MALAT1 chr11-65569536-65570572 0.18919341 1.3129690 1.776141e-08 0.6525889
+#> 6 MALAT1 chr11-65711306-65712797 0.25426633 1.1400479 1.496624e-08 0.7139586
+#>          cor
+#> 1 0.01180729
+#> 2 0.16766414
+#> 3 0.07195509
+#> 4 0.15467261
+#> 5 0.09259916
+#> 6 0.09048044
+```
+
+* Running `scMultiMap` on this dataset took ~20-25 seconds using a single core of an Intel(R) Xeon(R) Gold 6326 CPU @ 2.90GHz.
+.
+* `res` is a dataframe with association statistics and p-values for each of 32296 peak-gene pairs.
+
+## 2.3 Downstream analysis: consistency analysis
+
+To demonstrate `scMultiMap` is powerful for identifying cell-type-specific enhancer-gene pairs,  we consider the examples presented in Figure~2b of the [manuscript](https://www.biorxiv.org/content/10.1101/2024.09.24.614814v1) and evaluate the consistency (overlap) between results from `scMultiMap` and that from promoter capture Hi-C (PCHiC). 
+
+
+``` r
+# Data required for liftover form hg19 to hg38
+# from http://hgdownload.cse.ucsc.edu/goldenPath/hg19/liftOver/hg19ToHg38.over.chain.gz
+chain = import.chain(sprintf("%s/hg19ToHg38.over.chain", data_dir))
+```
+
+First, we preprocess PCHiC data and lift it over from hg19 to hg38 to match the genome version used in the 10x Multiome data (hg38).
+
+``` r
+# Obtain promoter capture Hi-C data from http://dx.doi.org/10.1016/j.cell.2016.09.037.
+# supplementary data "DATA_S1/PCHiC_peak_matrix_cutoff5.tsv"
+
+PCHiC <- read.table(sprintf('%s/PCHiC_peak_matrix_cutoff5.tsv', data_dir), header = T)
+# focus on CD14 monocytes as denoted by the column 'Mon'
+PCHiC <- PCHiC[, c('oeChr', 'oeStart', 'oeEnd', # peak info
+                  'baitName', # gene name,
+                  'Mon')] # CHiCAGO scores for CD14 monocytes
+colnames(PCHiC)[1:3] <- c('chr', 'start', 'end')
+grange_hg19 <- GenomicRanges::makeGRangesFromDataFrame(df = PCHiC, keep.extra.columns = T)
+seqlevelsStyle(grange_hg19) = "UCSC"
+grange_hg38 <- rtracklayer::liftOver(grange_hg19, chain)
+grange_hg38 <- unlist(grange_hg38)
+genome(grange_hg38) = "hg38"
+
+# significantly associated peak-gene pairs
+# defined by CHiCAGO scores >=5 (reference: http://dx.doi.org/10.1016/j.cell.2016.09.037)
+sig_assay_gr <- grange_hg38[grange_hg38@elementMetadata[['Mon']] > 5]
+sig_assay_gr$gene <- sig_assay_gr$baitName
+```
+
+### scMultiMap
+
+We then evaluate its overlap with `scMultiMap`'s results.
+
+``` r
+scMultiMap_overlap <- validate_with_assay(scMultiMap_res, sig_assay_gr, pvar = "padj", p_cutoff = 0.2)
+#> [1] "p value from one-sided Fisher exact test: 5.39e-12, #overlap: 246, odds ratio: 1.74"
+```
+
+### Signac
+In comparison, we also evaluated `Signac`'s results.
+
+``` r
+# By default, Signac uses normalized data to compute peak-gene associations
+pbmc_cd14 <- NormalizeData(object = pbmc_cd14)
+```
+
+``` r
+##### 
+##### The code below could take 3 hours to run, as
+#####   (1) it consider all peaks instead of peaks with high abundance
+#####   (2) constructing the sampling-based null distribution is computationally intensive
+# Run Signac
+signac_res <- LinkPeaks(pbmc_cd14, 'peaks_ct', 'RNA',
+                        genes.use = unique(pairs_df$gene), # consider the same genes as above
+                        pvalue_cutoff = 1, score_cutoff = 0) # return the results on all pairs
+#   |++++++++++++++++++++++++++++++++++++++++++++++++++| 100% elapsed=03h 17m 21s
+######
+```
+
+
+
+
+``` r
+# Bug in Signac's p-value (01/2025):
+# the two-sided p-values are evaluated with only one tail of the Gaussian distribution
+# https://github.com/stuart-lab/signac/blob/8ecdde2/R/links.R#L481C29-L481C30
+summary(Links(signac_res)$pvalue) # the maximum is smaller than 1
+#>    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+#>  0.0000  0.1167  0.2449  0.2449  0.3719  0.5000
+# manually adjust this
+Links(signac_res)$pvalue <- 2*Links(signac_res)$pvalue
+
+signac_res <- as.data.frame(Links(signac_res))
+# consider the same set of peak-gene pairs as scMultiMap
+scMultiMap_res$pg <- paste(scMultiMap_res$peak, scMultiMap_res$gene, sep = ':')
+signac_res$pg <- paste(signac_res$peak, signac_res$gene, sep = ':')
+signac_res <- signac_res[match(scMultiMap_res$pg, signac_res$pg), ]
+```
+
+
+``` r
+# consistent with evaluating scMultiMap's result, we use BH procedure and set the significance cutoff to be 0.2
+signac_res$padj <- p.adjust(signac_res$pvalue, method = 'BH')
+signac_overlap <- validate_with_assay(signac_res, sig_assay_gr, pvar = "padj", p_cutoff = 0.2)
+#> [1] "p value from one-sided Fisher exact test: 7.61e-02, #overlap: 59, odds ratio: 1.23"
+```
+
+### SCENT
+
+We further evaluate SCENT, another method benchmarked in scMultiMap's [manuscript](https://www.biorxiv.org/content/10.1101/2024.09.24.614814v1), you could try the code below. Please note that it could extremely computationally intensive due to the use of boostrapping. Running the codes below took **17 hours, 34 minutes** using **8** cores of an Intel(R) Xeon(R) Gold 6326 CPU @ 2.90GHz. The high computational costs were also demonstrated by Figure 1c in scMultiMap's [manuscript](https://www.biorxiv.org/content/10.1101/2024.09.24.614814v1).
+
+
+``` r
+# Tutorial for running SCENT:
+# https://github.com/immunogenomics/SCENT
+if (!requireNamespace("SCENT", quietly = TRUE)) devtools::install_github("immunogenomics/SCENT")
+library(SCENT)
+```
+
+
+``` r
+# extract count matrices
+peak_counts <- pbmc_cd14[['peaks_ct']]@counts[unique(pairs_df$peak),]
+rna_counts <- pbmc_cd14[['RNA']]@counts[unique(pairs_df$gene),]
+# construct metadata for cell-level covariates
+mdata <- pbmc_cd14@meta.data
+mdata$cell <- rownames(mdata)
+mdata$log_total_counts <- log(colSums(pbmc_cd14[['RNA']]@counts))
+covariates_set <- "log_total_counts"
+
+SCENT_obj <- CreateSCENTObj(rna = rna_counts, atac = peak_counts,
+                            meta.data = mdata,
+                            peak.info = pairs_df,
+                            covariates = covariates_set,
+                            celltypes = 'predicted.id') # column name for the cell type label in `mdata`
+
+start_time <- Sys.time()
+SCENT_obj <- SCENT_algorithm(object = SCENT_obj, celltype = 'CD14 Mono',
+                            ncores=8, # for parallelism
+                             regr = 'poisson', bin = TRUE) # default
+end_time <- Sys.time()
+
+SCENT.result <- SCENT_obj@SCENT.result
+
+# print elapsed time
+elapsed <- difftime(end_time, start_time, units = "secs")
+message(sprintf("scMultiMap elapsed time: %02d:%02d (mm:ss)\n",
+              (as.integer(elapsed) %% 3600) %/% 60, # Minutes
+              as.integer(elapsed) %% 60))        # Seconds
+
+```
+
+
+
+
+``` r
+SCENT.result$padj <- p.adjust(SCENT.result$boot_basic_p, method = 'BH')
+SCENT_overlap <- validate_with_assay(SCENT.result, sig_assay_gr, pvar = "padj", p_cutoff = 0.2)
+#> [1] "p value from one-sided Fisher exact test: 5.77e-01, #overlap: 149, odds ratio: 0.98"
+```
+
+### Summary of comparison
+
+In this example, `scMultiMap` identified 246 pairs overlapped with PCHiC data on CD14 monocytes, while `Signac` and `SCENT` only identified 59 and 149 pairs, respectively. Moreover, `scMultiMap` also gave the highest enrichment (odds ratio=1.74) compared to `Signac` (1.23) and `SCENT` (0.98). In particular, `SCENT` has a odds ratio smaller than 1, potentially due to a large number of false positive discoveries that are not consistent with PCHiC.
+
+This is one example that demonstrates the improved performance by `scMultiMap` compared to existing methods. Please refer to scMultiMap's [manuscript](https://www.biorxiv.org/content/10.1101/2024.09.24.614814v1) for more examples, including additional consistency analysis with orthogonal assays, reproducibility analysis across independent single-cell multimodal datasets, and systematic evaluation of type I error and power.
+
+Note that the numerical results (i.e., the numbers of reproduced pairs and odds ratio) presented here differ slightly from those in the paper, as the published analysis combined four single-cell Multiome PBMC datasets to increase power (see Methods in [manuscript](https://www.biorxiv.org/content/10.1101/2024.09.24.614814v1)). However, the overall conclusions regarding the comparison across methods remain unchanged. 
+
+# More vignettes
+
+Please visit vignettes: [scMultiMap for disease-control studies](disease_control.html) and [scMultiMap for integrative analysis with GWAS results](GWAS.html) if you are interested in more examples of analysis with `scMultiMap`!
+
