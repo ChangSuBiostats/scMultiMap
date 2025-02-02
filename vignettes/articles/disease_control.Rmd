@@ -286,8 +286,9 @@ g <- pheatmap(t(coexp_mat[DEG_inds & subset_inds,]),
 ```{r include=T}
 print(getwd())
 print(list.files())
-knitr::include_graphics('man/figures/dc_heatmap.png')
+#knitr::include_graphics('man/figures/dc_heatmap.png')
 knitr::include_graphics('reference/figures/dc_heatmap.png')
+knitr::include_graphics('../reference/figures/dc_heatmap.png')
 ```
 
 This reproduced Figure~4b in the scMultiMap's [manuscript](https://www.biorxiv.org/content/10.1101/2024.09.24.614814v1). 
