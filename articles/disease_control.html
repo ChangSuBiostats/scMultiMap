@@ -326,6 +326,21 @@ have a difference of correlation greater than 0.2.</p>
 <span>            show_colnames <span class="op">=</span> <span class="cn">F</span>, show_rownames <span class="op">=</span> <span class="cn">T</span>, <span class="co"># displaying column and row names</span></span>
 <span>            cellheight<span class="op">=</span><span class="fl">50</span>, treeheight_col <span class="op">=</span> <span class="fl">15</span>,</span>
 <span>            fontsize <span class="op">=</span> <span class="fl">12</span><span class="op">)</span> </span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1] 1</span></span></code></pre>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1] "/home/runner/work/scMultiMap/scMultiMap/vignettes/articles"</span></span></code></pre>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.files.html" class="external-link">list.files</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1] "disease_control.Rmd"      "disease_control.Rmd.orig"</span></span>
+<span><span class="co">## [3] "GWAS.Rmd"                 "GWAS.Rmd.orig"           </span></span>
+<span><span class="co">## [5] "scMultiMap.Rmd"           "scMultiMap.Rmd.orig"</span></span></code></pre>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#knitr::include_graphics('man/figures/dc_heatmap.png')</span></span>
+<span><span class="co">#knitr::include_graphics('reference/figures/dc_heatmap.png')</span></span>
+<span><span class="co">#knitr::include_graphics('../reference/figures/dc_heatmap.png')</span></span></code></pre></div>
 <p>This reproduced Figure~4b in the scMultiMap’s <a href="https://www.biorxiv.org/content/10.1101/2024.09.24.614814v1" class="external-link">manuscript</a>.</p>
 <p>These differentially associated peak-gene pairs can be further
 analyzed with GWAS (Genome-wide association studies) results, to
