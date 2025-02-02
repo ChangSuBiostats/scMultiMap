@@ -236,10 +236,6 @@ of times that the “observed difference” is larger in magnitude than the
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>cex <span class="op">=</span> <span class="fl">1.5</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="va">permu_pval</span>, main <span class="op">=</span> <span class="st">'Permutation p-values'</span>, breaks <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
-<div class="float">
-<img src="./articles/figures/dc_pval.png" width="360" height="360" alt="Distribution of differential association p-values"><div class="figcaption">Distribution of differential association
-p-values</div>
-</div>
 </div>
 <div class="section level2">
 <h2 id="downstream-analysis-of-differentially-associated-peak-gene-pairs">Downstream analysis of differentially associated peak-gene
@@ -330,10 +326,6 @@ have a difference of correlation greater than 0.2.</p>
 <span>            show_colnames <span class="op">=</span> <span class="cn">F</span>, show_rownames <span class="op">=</span> <span class="cn">T</span>, <span class="co"># displaying column and row names</span></span>
 <span>            cellheight<span class="op">=</span><span class="fl">50</span>, treeheight_col <span class="op">=</span> <span class="fl">15</span>,</span>
 <span>            fontsize <span class="op">=</span> <span class="fl">12</span><span class="op">)</span> </span></code></pre></div>
-<div class="float">
-<img src="./articles/figures/dc_heatmap.png" style="width:65.0%" alt="Heatmap of differential peak-gene associations"><div class="figcaption">Heatmap of differential peak-gene
-associations</div>
-</div>
 <p>This reproduced Figure~4b in the scMultiMap’s <a href="https://www.biorxiv.org/content/10.1101/2024.09.24.614814v1" class="external-link">manuscript</a>.</p>
 <p>These differentially associated peak-gene pairs can be further
 analyzed with GWAS (Genome-wide association studies) results, to
