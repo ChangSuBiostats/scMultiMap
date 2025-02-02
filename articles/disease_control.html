@@ -335,9 +335,13 @@ have a difference of correlation greater than 0.2.</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.files.html" class="external-link">list.files</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] "disease_control.Rmd"      "disease_control.Rmd.orig"</span></span>
-<span><span class="co">## [3] "GWAS.Rmd"                 "GWAS.Rmd.orig"           </span></span>
-<span><span class="co">## [5] "scMultiMap.Rmd"           "scMultiMap.Rmd.orig"</span></span></code></pre>
+<span><span class="co">## [3] "figures"                  "GWAS.Rmd"                </span></span>
+<span><span class="co">## [5] "GWAS.Rmd.orig"            "scMultiMap.Rmd"          </span></span>
+<span><span class="co">## [7] "scMultiMap.Rmd.orig"</span></span></code></pre>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_graphics.html" class="external-link">include_graphics</a></span><span class="op">(</span><span class="st">'figures/dc_heatmap.png'</span><span class="op">)</span></span></code></pre></div>
+<p><img src="figures%2Fdc_heatmap.png" width="1125"></p>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#knitr::include_graphics('man/figures/dc_heatmap.png')</span></span>
 <span><span class="co">#knitr::include_graphics('reference/figures/dc_heatmap.png')</span></span>
 <span><span class="co">#knitr::include_graphics('../reference/figures/dc_heatmap.png')</span></span></code></pre></div>
