@@ -1,0 +1,11 @@
+pandoc: 3.1.11
+pkgdown: 2.1.1
+pkgdown_sha: ~
+articles:
+  articles/disease_control: disease_control.html
+  articles/GWAS: GWAS.html
+  articles/scMultiMap: scMultiMap.html
+last_built: 2025-02-02T20:28Z
+urls:
+  reference: https://changsubiostats.github.io/scMultiMap/reference
+  article: https://changsubiostats.github.io/scMultiMap/articles
