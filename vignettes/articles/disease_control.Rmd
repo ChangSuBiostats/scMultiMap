@@ -185,7 +185,10 @@ permu_pval <- pmin(pval1, pval2) * 2
 par(cex = 1.5)
 hist(permu_pval, main = 'Permutation p-values', breaks = 10)
 ```
-![Distribution of differential association p-values](./vignettes/figures/dc_pval.png){width=360 height=360}
+
+```{r include=F}
+knitr::include_graphics('figures/dc_pval.png')
+```
 
 # Downstream analysis of differentially associated peak-gene pairs
 
@@ -280,8 +283,10 @@ g <- pheatmap(t(coexp_mat[DEG_inds & subset_inds,]),
 ```
 
 
-
-![Heatmap of differential peak-gene associations](./vignettes/figures/dc_heatmap.png){width=65%}
+```{r include=F}
+list.files()
+knitr::include_graphics('figures/dc_heatmap.png')
+```
 
 This reproduced Figure~4b in the scMultiMap's [manuscript](https://www.biorxiv.org/content/10.1101/2024.09.24.614814v1). 
 
