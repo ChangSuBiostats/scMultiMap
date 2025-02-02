@@ -213,7 +213,7 @@ g
 
 
 
-![PICALM locus](./vignettes/figures/PICALM_links.png){width=80%}
+![Links and SNPs at the PICALM locus](./vignettes/figures/PICALM_links.png){width=80%}
 
 This reproduced Figure~4d in the scMultiMap's [manuscript](https://www.biorxiv.org/content/10.1101/2024.09.24.614814v1).
 
@@ -299,6 +299,6 @@ g
 
 
 
-![INPP5D locus](./vignettes/figures/INPP5D_links.png){width=80%}
+![Links and SNPs at the INPP5D locus](./vignettes/figures/INPP5D_links.png){width=80%}
 
 This reproduced Figure~4e in the scMultiMap's [manuscript](https://www.biorxiv.org/content/10.1101/2024.09.24.614814v1).

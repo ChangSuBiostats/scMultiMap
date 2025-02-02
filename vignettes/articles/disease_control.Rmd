@@ -281,7 +281,7 @@ g <- pheatmap(t(coexp_mat[DEG_inds & subset_inds,]),
 
 
 
-![Heatmap of differential peak-gene association](./vignettes/figures/dc_heatmap.png){width=65%}
+![Heatmap of differential peak-gene associations](./vignettes/figures/dc_heatmap.png){width=65%}
 
 This reproduced Figure~4b in the scMultiMap's [manuscript](https://www.biorxiv.org/content/10.1101/2024.09.24.614814v1). 
 
