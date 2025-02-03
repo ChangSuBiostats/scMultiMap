@@ -186,8 +186,8 @@ par(cex = 1.5)
 hist(permu_pval, main = 'Permutation p-values', breaks = 10)
 ```
 
-```{r include=F}
-#knitr::include_graphics('figures/dc_pval.png')
+```{r echo=F}
+knitr::include_graphics('figures/dc_pval.png')
 ```
 
 # Downstream analysis of differentially associated peak-gene pairs
@@ -283,14 +283,9 @@ g <- pheatmap(t(coexp_mat[DEG_inds & subset_inds,]),
 ```
 
 
-```{r include=T}
-print(1)
-print(getwd())
-print(list.files())
-knitr::include_graphics('figures/dc_heatmap.png')
-#knitr::include_graphics('man/figures/dc_heatmap.png')
-#knitr::include_graphics('reference/figures/dc_heatmap.png')
-#knitr::include_graphics('../reference/figures/dc_heatmap.png')
+```{r eval=T,echo=F}
+knitr::include_graphics('figures/dc_heatmap.png') # works for remote build by GitHub Action
+#knitr::include_graphics('dc_heatmap.png') # works for local build by pkgdown::build_site() (pkgdown can not properly handles relative paths) 
 ```
 
 This reproduced Figure~4b in the scMultiMap's [manuscript](https://www.biorxiv.org/content/10.1101/2024.09.24.614814v1). 
