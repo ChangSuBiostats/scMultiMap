@@ -28,13 +28,19 @@ navbar:
         href: articles/disease_control.html
       - text: scMultiMap for integrative analysis with GWAS results
         href: articles/GWAS.html
+    github:
+      icon: fa-github
+      href: https://github.com/ChangSuBiostats/scMultiMap
+      aria-label: "View the scMultiMap GitHub repository"
 home:
   sidebar:
     structure:
-    - license
     - authors
     - links
+    - license
   links:
+  - text: "View scMultiMap on GitHub"
+    href: https://github.com/ChangSuBiostats/scMultiMap
   - text: scMultiMap manuscript
     href: https://www.biorxiv.org/content/10.1101/2024.09.24.614814v1
   - text: Chang Su's homepage

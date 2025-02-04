@@ -1,5 +1,7 @@
 ---
 title: "Introduction to scMultiMap"
+author: "Chang Su"
+date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Introduction to scMultiMap}

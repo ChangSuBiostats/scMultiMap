@@ -1,5 +1,7 @@
 ---
 title: "scMultiMap for disease-control studies"
+author: "Chang Su"
+date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{scMultiMap for disease-control studies}
@@ -283,9 +285,9 @@ g <- pheatmap(t(coexp_mat[DEG_inds & subset_inds,]),
 ```
 
 
-```{r eval=T,echo=F}
+```{r eval=T,echo=F,out.width="80%"}
 knitr::include_graphics('figures/dc_heatmap.png') # works for remote build by GitHub Action
-#knitr::include_graphics('dc_heatmap.png') # works for local build by pkgdown::build_site() (pkgdown can not properly handles relative paths) 
+#knitr::include_graphics('dc_heatmap.png') # works for local build by pkgdown::build_site() (pkgdown can not properly handles the relative path above) 
 ```
 
 This reproduced Figure~4b in the scMultiMap's [manuscript](https://www.biorxiv.org/content/10.1101/2024.09.24.614814v1). 

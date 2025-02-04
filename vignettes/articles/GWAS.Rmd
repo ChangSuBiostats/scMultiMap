@@ -1,5 +1,7 @@
 ---
 title: "scMultiMap for integrative analysis with GWAS results"
+author: "Chang Su"
+date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{scMultiMap for integrative analysis with GWAS results}
