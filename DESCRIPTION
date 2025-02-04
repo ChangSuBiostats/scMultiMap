@@ -1,6 +1,6 @@
 Package: scMultiMap
 Title: Cell-type-specific mapping of enhancer and target genes from single-cell multimodal data with scMultiMap
-Version: 1.0.0
+Version: 1.0.1
 Authors@R: 
     person("Chang", "Su", , "chang.su@emory.edu", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-8704-1512"))

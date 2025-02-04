@@ -1,3 +1,6 @@
+# scMultiMap 1.0.1 (2025-02-3)
+- **Polished website**
+
 # scMultiMap 1.0.0 (2025-02-02)
 
 - **First official release** of `scMultiMap`.

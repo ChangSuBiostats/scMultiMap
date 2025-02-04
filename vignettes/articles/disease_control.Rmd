@@ -188,7 +188,7 @@ par(cex = 1.5)
 hist(permu_pval, main = 'Permutation p-values', breaks = 10)
 ```
 
-```{r echo=F}
+```{r echo=F,out.width="35%"}
 knitr::include_graphics('figures/dc_pval.png')
 ```
 
