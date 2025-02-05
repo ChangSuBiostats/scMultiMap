@@ -2,6 +2,7 @@
 
 `scMultiMap` is an R package for inferring cell-type-specific peak-gene associations using single-cell multimodal data. It implements the statistical method proposed in the manuscript [Cell-type-specific mapping of enhancer and target genes from single-cell multimodal data](https://www.biorxiv.org/content/10.1101/2024.09.24.614814v1), currently under revision at *Nature Communications*.
 
+=======
 
 ## Installation
 
@@ -36,6 +37,10 @@ To reproduce the analysis in  [Cell-type-specific mapping of enhancer and target
 ## Contact us
 
 For issues or feature requests, please visit [GitHub Issues](https://github.com/ChangSuBiostats/scMultiMap/issues).
+
+## Reproducibility code
+
+To reproduce the analysis in our paper, please visit our dedicated GitHub repository containing the source code used in the paper: [scMultiMap_analysis](https://github.com/ChangSuBiostats/scMultiMap_analysis).
 
 ## Reference and Updates
 

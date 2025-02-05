@@ -30,7 +30,8 @@ In scMultiMap's [manuscript](https://www.biorxiv.org/content/10.1101/2024.09.24.
 
 # Load pre-processed data
 
-We downloaded the single-cell Multiome data on brain from an Alzheimer's disease study [Anderson et al.](https://pmc.ncbi.nlm.nih.gov/articles/PMC10025452/), which is the same dataset we used in the manuscript ([GSE214979](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE214979)). We further re-called peaks by cell types with MACS2 using the codes at the [scMultiMap reproducibility Github repo](https://github.com/ChangSuBiostats/scMultiMap_analysis/preprocessing/preprocess_10x_PBMC_data.R). Calling peaks by cell types generates cell-type-specific peaks that better represent candidate cell-type-specific enhancers than those identified with all cell types merged, which may obscure signals from less abundant cell types such as microglia. Using MACS2 provides the fragment counts required for running `scMultiMap` (see discussion [here](scMultiMap.html)).
+We downloaded the single-cell Multiome data on brain from an Alzheimer's disease study [Anderson et al.](https://pmc.ncbi.nlm.nih.gov/articles/PMC10025452/), which is the same dataset we used in the manuscript ([GSE214979](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE214979)). We further re-called peaks by cell types with MACS2 using the codes at the [scMultiMap reproducibility Github repo](https://github.com/ChangSuBiostats/scMultiMap_analysis/blob/master/preprocessing/). 
+Calling peaks by cell types generates cell-type-specific peaks that better represent candidate cell-type-specific enhancers than those identified with all cell types merged, which may obscure signals from less abundant cell types such as microglia. Using MACS2 provides the fragment counts required for running `scMultiMap`.
 
 
 ``` r
