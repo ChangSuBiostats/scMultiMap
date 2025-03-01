@@ -43,4 +43,4 @@ For issues or feature requests, please visit [GitHub Issues](https://github.com/
 Chang Su, Dongsoo Lee, Peng Jin and Jingfei Zhang. (2024). [Cell-type-specific mapping of enhancer and target genes from single-cell multimodal data](https://www.biorxiv.org/content/10.1101/2024.09.24.614814v1). Accepted in principle by *Nature Communications*.
 
 [![GitHub Repo](https://img.shields.io/badge/GitHub-Repo-blue.svg)](https://github.com/ChangSuBiostats/scMultiMap)
-
+[![DOI](https://zenodo.org/badge/926214227.svg)](https://doi.org/10.5281/zenodo.14948456)
