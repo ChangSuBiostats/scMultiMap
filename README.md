@@ -1,8 +1,7 @@
 # scMultiMap
 
-`scMultiMap` is an R package for inferring cell-type-specific peak-gene associations using single-cell multimodal data. It implements the statistical method proposed in the manuscript [Cell-type-specific mapping of enhancer and target genes from single-cell multimodal data](https://www.biorxiv.org/content/10.1101/2024.09.24.614814v1), currently under revision at *Nature Communications*.
+`scMultiMap` is an R package for inferring cell-type-specific peak-gene associations using single-cell multimodal data. It implements the statistical method proposed in the manuscript [Cell-type-specific mapping of enhancer and target genes from single-cell multimodal data](https://www.biorxiv.org/content/10.1101/2024.09.24.614814v1), accepted in principle by *Nature Communications*. (The link to the published article will be posted once available.)
 
-=======
 
 ## Installation
 
@@ -38,13 +37,10 @@ To reproduce the analysis in  [Cell-type-specific mapping of enhancer and target
 
 For issues or feature requests, please visit [GitHub Issues](https://github.com/ChangSuBiostats/scMultiMap/issues).
 
-## Reproducibility code
-
-To reproduce the analysis in our paper, please visit our dedicated GitHub repository containing the source code used in the paper: [scMultiMap_analysis](https://github.com/ChangSuBiostats/scMultiMap_analysis).
 
 ## Reference and Updates
 
-Chang Su, Dongsoo Lee, Peng Jin and Jingfei Zhang. (2024). [Cell-type-specific mapping of enhancer and target genes from single-cell multimodal data](https://www.biorxiv.org/content/10.1101/2024.09.24.614814v1). Manuscript under revision at *Nature Communications*.
+Chang Su, Dongsoo Lee, Peng Jin and Jingfei Zhang. (2024). [Cell-type-specific mapping of enhancer and target genes from single-cell multimodal data](https://www.biorxiv.org/content/10.1101/2024.09.24.614814v1). Accepted in principle by *Nature Communications*.
 
 [![GitHub Repo](https://img.shields.io/badge/GitHub-Repo-blue.svg)](https://github.com/ChangSuBiostats/scMultiMap)
 
