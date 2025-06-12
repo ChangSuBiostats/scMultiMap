@@ -1,6 +1,8 @@
 # scMultiMap
 
-`scMultiMap` is an R package for inferring cell-type-specific peak-gene associations using single-cell multimodal data. It implements the statistical method proposed in the manuscript [Cell-type-specific mapping of enhancer and target genes from single-cell multimodal data](https://www.biorxiv.org/content/10.1101/2024.09.24.614814v1), accepted in principle by *Nature Communications*. (The link to the published article will be posted once available.)
+`scMultiMap` is an R package for inferring cell-type-specific peak-gene associations using single-cell multimodal data. It implements the statistical method proposed in article [scMultiMap: Cell-type-specific mapping of enhancers and target genes from single-cell multimodal data](https://doi.org/10.1038/s41467-025-59306-z).
+
+**Citation**: Chang Su, Dongsoo Lee, Peng Jin and Jingfei Zhang. (2025). scMultiMap: Cell-type-specific mapping of enhancers and target genes from single-cell multimodal data. *Nature Communications*.
 
 
 ## Installation
@@ -30,17 +32,17 @@ The following vignettes provide detailed use cases for `scMultiMap`:
 
 ## scMultiMap_analysis for reproducibility
 
-To reproduce the analysis in  [Cell-type-specific mapping of enhancer and target genes from single-cell multimodal data](https://www.biorxiv.org/content/10.1101/2024.09.24.614814v1), please visit our dedicated GitHub repository containing the source code used in the paper: [scMultiMap_analysis](https://github.com/ChangSuBiostats/scMultiMap_analysis).
+To reproduce the analysis in scMultiMap article, please visit our dedicated GitHub repository containing the source code used in the paper: [scMultiMap_analysis](https://github.com/ChangSuBiostats/scMultiMap_analysis).
 
 
 ## Contact us
 
-For issues or feature requests, please visit [GitHub Issues](https://github.com/ChangSuBiostats/scMultiMap/issues).
+For issues or feature requests, please visit [GitHub Issues](https://github.com/ChangSuBiostats/scMultiMap/issues). If an issue remains unanswered for a while, you are welcome to email the maintainer at chang.su@emory.edu.
 
 
-## Reference and Updates
+## Updates
 
-Chang Su, Dongsoo Lee, Peng Jin and Jingfei Zhang. (2024). [Cell-type-specific mapping of enhancer and target genes from single-cell multimodal data](https://www.biorxiv.org/content/10.1101/2024.09.24.614814v1). Accepted in principle by *Nature Communications*.
+[04/26/2026] Published at Nature Communications.
 
 [![GitHub Repo](https://img.shields.io/badge/GitHub-Repo-blue.svg)](https://github.com/ChangSuBiostats/scMultiMap)
 [![DOI](https://zenodo.org/badge/926214227.svg)](https://doi.org/10.5281/zenodo.14948456)
