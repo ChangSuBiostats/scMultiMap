@@ -59,7 +59,7 @@
       <h1>scMultiMap for integrative analysis with GWAS results</h1>
                         <h4 data-toc-skip class="author">Chang Su</h4>
             
-            <h4 data-toc-skip class="date">2025-03-01</h4>
+            <h4 data-toc-skip class="date">2025-06-12</h4>
       
 
       <div class="d-none name"><code>GWAS.Rmd</code></div>
@@ -253,7 +253,7 @@ variants<a class="anchor" aria-label="anchor" href="#visualize-inferred-peak-gen
 <span><span class="co"># to see it on the plot</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/start.html" class="external-link">end</a></span><span class="op">(</span><span class="va">grange_mic_fm_prior</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/start.html" class="external-link">end</a></span><span class="op">(</span><span class="va">grange_mic_fm_prior</span><span class="op">)</span> <span class="op">+</span> <span class="fl">1000</span></span>
 <span></span>
-<span><span class="fu"><a href="https://mojaveazure.github.io/seurat-object/reference/DefaultAssay.html" class="external-link">DefaultAssay</a></span><span class="op">(</span><span class="va">ct_obj</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">'peaks'</span></span>
+<span><span class="fu"><a href="https://satijalab.github.io/seurat-object/reference/DefaultAssay.html" class="external-link">DefaultAssay</a></span><span class="op">(</span><span class="va">ct_obj</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">'peaks'</span></span>
 <span><span class="va">snp_plot</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://stuartlab.org/signac/reference/PeakPlot.html" class="external-link">PeakPlot</a></span><span class="op">(</span></span>
 <span>  <span class="va">ct_obj</span>,</span>
 <span>  <span class="va">selected_range</span>,</span>
@@ -270,7 +270,7 @@ variants<a class="anchor" aria-label="anchor" href="#visualize-inferred-peak-gen
 <span>                   heights <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span> <span class="op">*</span> <span class="fl">5</span><span class="op">/</span><span class="fl">7</span>,</span>
 <span>                   widths <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">6.5</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">g</span></span></code></pre></div>
-<p><img src="figures%2FPICALM_links.png" width="80%"></p>
+<p><img src="figures/PICALM_links.png" width="80%"></p>
 <p>This reproduced Figure~4d in the scMultiMap’s <a href="https://www.biorxiv.org/content/10.1101/2024.09.24.614814v1" class="external-link">manuscript</a>.</p>
 </div>
 <div class="section level3">
@@ -323,7 +323,7 @@ variants<a class="anchor" aria-label="anchor" href="#visualize-inferred-peak-gen
 <span><span class="co"># to see it on the plot</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/start.html" class="external-link">end</a></span><span class="op">(</span><span class="va">grange_mic_fm_prior</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/start.html" class="external-link">end</a></span><span class="op">(</span><span class="va">grange_mic_fm_prior</span><span class="op">)</span> <span class="op">+</span> <span class="fl">1000</span></span>
 <span></span>
-<span><span class="fu"><a href="https://mojaveazure.github.io/seurat-object/reference/DefaultAssay.html" class="external-link">DefaultAssay</a></span><span class="op">(</span><span class="va">ct_obj</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">'peaks'</span></span>
+<span><span class="fu"><a href="https://satijalab.github.io/seurat-object/reference/DefaultAssay.html" class="external-link">DefaultAssay</a></span><span class="op">(</span><span class="va">ct_obj</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">'peaks'</span></span>
 <span><span class="va">snp_plot</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://stuartlab.org/signac/reference/PeakPlot.html" class="external-link">PeakPlot</a></span><span class="op">(</span></span>
 <span>  <span class="va">ct_obj</span>,</span>
 <span>  <span class="va">selected_range</span>,</span>
@@ -340,7 +340,7 @@ variants<a class="anchor" aria-label="anchor" href="#visualize-inferred-peak-gen
 <span>                   heights <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span> <span class="op">*</span> <span class="fl">5</span><span class="op">/</span><span class="fl">7</span>,</span>
 <span>                   widths <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">6.5</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">g</span></span></code></pre></div>
-<p><img src="figures%2FINPP5D_links.png" width="80%"></p>
+<p><img src="figures/INPP5D_links.png" width="80%"></p>
 <p>This reproduced Figure~4e in the scMultiMap’s <a href="https://www.biorxiv.org/content/10.1101/2024.09.24.614814v1" class="external-link">manuscript</a>.</p>
 </div>
 </div>
@@ -355,7 +355,7 @@ variants<a class="anchor" aria-label="anchor" href="#visualize-inferred-peak-gen
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer>
